@@ -1,0 +1,10 @@
+package_assets: off
+gzip_assets: off
+compress_assets: off
+template_function: _.template
+
+javascripts:
+    app.js:
+        - js/underscore.js
+        - js/backbone.js
+        - js/widget.js
