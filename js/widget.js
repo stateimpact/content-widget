@@ -14,6 +14,7 @@
     require('_', 'http://documentcloud.github.com/underscore/underscore-min.js');
 })();
 
+/***
 var JST = {};
 JST.story = _.template('<h4 class="si-story-title"><a href="<%= link %>"><%= title %></a></h4>' +
                   '<p class="si-story-meta">' +
@@ -21,7 +22,7 @@ JST.story = _.template('<h4 class="si-story-title"><a href="<%= link %>"><%= tit
                     '<span class="si-story-date"><%= date.toDateString() %></span>' + 
                   '</p>' + 
                   '<div class="si-story-excerpt"><%= excerpt %></div>')
-
+***/
 jQuery(function($) {
     
     var Story = Backbone.Model.extend({
@@ -54,7 +55,7 @@ jQuery(function($) {
     var StoryView = Backbone.View.extend({
         
         className: "si-story",
-        template: JST.story,
+        template: window.JST.story,
         
         initialize: function(options) {
             _.bindAll(this);
@@ -105,4 +106,4 @@ jQuery(function($) {
         }
     });
     
-})
+});

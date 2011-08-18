@@ -4,7 +4,8 @@ compress_assets: off
 template_function: _.template
 
 javascripts:
-    app.js:
+    postswidget:
         - js/underscore.js
         - js/backbone.js
+        - jst/*.jst
         - js/widget.js
