@@ -20,7 +20,7 @@ JST.story = _.template('<h4 class="si-story-title"><a href="<%= link %>"><%= tit
                     '<span class="si-story-author"><%= author %></span> | ' +
                     '<span class="si-story-date"><%= date.toDateString() %></span>' + 
                   '</p>' + 
-                  '<p class="si-story-excerpt"><%= excerpt %></p>')
+                  '<div class="si-story-excerpt"><%= excerpt %></div>')
 
 jQuery(function($) {
     
