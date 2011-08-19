@@ -1,6 +1,9 @@
-<h4 class="si-story-title"><%= title %></h4>
-<p class="si-story-meta">
-    <span class="si-story-author"><%= author %></span> | 
-    <span class="si-story-date"><%= date %></span>
-</p>
-<div class="si-story-excerpt"><%= excerpt %></div>
+<h4 class="si-story-title">
+	<a class="si-story-link-hed" href="<%= story.url %>"><%= story.title %></a>
+</h4>
+<% if (options.excerpts) { %>
+<h5 class="si-story-meta">
+	<span class="si-story-author"><%= story.author.name %></span> | <span class="si-story-date"><%= story.date.toDateString() %></span>
+</h5>
+<p class="si-story-excerpt"><%= story.excerpt %></p>
+<% } %>

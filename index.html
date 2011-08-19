@@ -3,28 +3,39 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>index</title>
+    <link href="css/base.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="css/skeleton.css" rel="stylesheet" type="text/css" media="screen">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <!--
     <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
     <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
     -->
-    <script src="public/assets/postswidget.js"></script>
 </head>
 <body>
-    <h1>Widgets!</h1>
-    <div id="content"><div>
-    <script>
-    // for testing
-    $(function() {
-        var url = "http://pipes.yahoo.com/pipes/pipe.run?_id=e099ea07a6c8500a94872cec9b21c2cd&_render=json";
-        window.widget = new StoryWidget({
-            el: '#content',
-            height: 500,
-            width: 300,
-            url: url
-        });
-        
-        widget.collection.fetch();
-    });
-    </script>
+    <div class="container">
+        <h1>Widgets!</h1>
+        <div class="post eight columns last">
+            <p>According to a <a href="http://www.pittsburghlive.com/x/pittsburghtrib/news/pittsburgh/s_746067.html">story in the Pittsburgh Tribune-Review</a>, Pennsylvania’s Fish and Boat Commission is</p> 
+            <div id="attachment_513" class="wp-caption alignnone" style="width: 310px"><a rel="attachment wp-att-513" href="http://localhost/wordpress/?attachment_id=513"><img class="size-medium wp-image-513" src="http://localhost/wordpress/wp-content/uploads/2011/07/bradford-co-0441-300x225.jpg" alt="" width="300" height="225" /></a><p class="wp-caption-text">A Bradford County drilling rig</p></div> 
+            <p>planning on leasing 43,000 acres of waterways to natural gas drillers, in order to raise revenue for dam repairs.</p> 
+            <blockquote><p>The commission estimates it will need $78 million to repair the 16 dams, which are classified as high risk because they cannot hold 50 percent of the maximum precipitation that a region could receive.</p> 
+            <p>Six of the dams are in Butler, Washington, Westmoreland, Fayette and Somerset counties. The commission estimates it will cost $26 million to repair them.</p> 
+            <p>[Commission spokesman Eric] Levis said 14,000 acres — or about one-third — of the commission&#8217;s waterways are potential drilling sites.</p></blockquote> 
+            <p>The Fish and Game Commission is just the latest state agency to lease out a natural resource for gas drilling. The Department of Conservation and Natural Resources has already<a href="http://www.dcnr.state.pa.us/forestry/marcellus/moratorium.html"> designated 700,000 of its 2.2 million acres</a> for gas exploration. When Governor Rendell signed a moratorium on additional leasing last year – a move he only made after leasing out an additional 32,000 acres – the Democrat’s office <a href="http://www.dcnr.state.pa.us/news/newsreleases/2010/1010-sfdrillingmoratorium.htm">estimated</a> “1,000 well pads and as many as 10,000 wells” will eventually be hosted on that land.</p> 
+            <p>Shortly after the moratorium went into effect, then-Attorney General Tom  Corbett said he’d likely overturn the executive order. So far, he’s yet to do that, and no attitional state land was leased as part of this year’s budget.</p> 
+            <p>Pennsylvania Sierra Club President Jeff Schmidt – who last week,<a href="http://stateimpact.npr.org/pennsylvania/2011/07/06/sierra-club-asks-the-national-park-service-to-halt-drilling-in-pennsylvanias-parks-and-forests/"> sent a letter to the National Park Service</a> arguing some of that leasing violates federal law – said he&#8217;s troubled by what he sees as a growing trend.  “What we are doing now is, in effect, taking assets and burning them. It’s like burning the furniture to heat the house.”</p>
+            </div>
+            <div id="content" class="eight columns"></div>
+            <script src="public/assets/postswidget.js"></script>
+            <script>
+            window.widget = new StoryWidget({
+                el: '#content',
+                theme: 'dark',
+                state: 'pennsylvania',
+                count: 5,
+                excerpts: true
+            });
+            </script>
+            
+    </div>
 </body>

@@ -10,20 +10,29 @@
     }
     window.require = require;
     
-    require('jQuery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js');
-    require('_', 'http://documentcloud.github.com/underscore/underscore-min.js');
 })();
 
-/***
-var JST = {};
-JST.story = _.template('<h4 class="si-story-title"><a href="<%= link %>"><%= title %></a></h4>' +
-                  '<p class="si-story-meta">' +
-                    '<span class="si-story-author"><%= author %></span> | ' +
-                    '<span class="si-story-date"><%= date.toDateString() %></span>' + 
-                  '</p>' + 
-                  '<div class="si-story-excerpt"><%= excerpt %></div>')
-***/
-jQuery(function($) {
+(function($) {
+    var BASE_URL = "http://localhost:9000/";
+    var loadCSS = function(url, media) {
+        var link   = document.createElement('link');
+        link.rel   = 'stylesheet';
+        link.type  = 'text/css';
+        link.media = media || 'screen';
+        link.href  = url;
+        var head   = document.getElementsByTagName('head')[0];
+        head.appendChild(link);
+    };
+    
+    var WidgetOptions = Backbone.Model.extend({
+        
+        defaults: {
+            count: 10,
+            excerpts: true,
+            theme: "light",
+            state: null
+        }
+    });
     
     var Story = Backbone.Model.extend({
         
@@ -32,7 +41,7 @@ jQuery(function($) {
             author: "",
             date: "",
             excerpt: "",
-            link: ""
+            url: ""
         },
         
         initialize: function(attributes, options) {
@@ -48,24 +57,28 @@ jQuery(function($) {
         model: Story,
         
         parse: function(response) {
-            return response.value.items;
+            return response.posts;
         }
     });
     
     var StoryView = Backbone.View.extend({
         
         className: "si-story",
-        template: window.JST.story,
         
         initialize: function(options) {
             _.bindAll(this);
+            this.template = window.JST['story']
             this.model.bind('change', this.render);
-            return this.render();
+            return this;
         },
         
-        render: function() {
-            $(this.el).html( this.template( this.model.toJSON() ));
-            return this;
+        render: function(options) {
+            var context = {
+                story: this.model.toJSON(),
+                options: options
+            }
+            $(this.el).html(this.template(context));
+            return this.el;
         }
     });
     
@@ -77,33 +90,35 @@ jQuery(function($) {
         
         initialize: function(options) {            
             _.bindAll(this);
-            _.defaults(options, {
-                height : 0,
-                width  : 0
-            });
+            this.options = new WidgetOptions(options);
+            this.collection = new StoryList;
             
-            this.collection = options.collection || new StoryList;
-            
-            if (options.url) {
-                this.collection.url = options.url;
-            }
-            
-            this.collection.bind('reset', this.render);
-            
-            this.options = options;
-            return this;
+            this.collection.bind('reset', this.render_content);
+            this.setBlogUrl(options.state);
+            this.template = window.JST['widget'];
+            return this.render();
         },
         
         render: function() {
-            var el = $(this.el).empty();
-            el.css({
-                height : this.options.height,
-                width  : this.options.width
-            });
+            loadCSS(BASE_URL + 'css/widget.css');
+            $(this.el).html(this.template(this.options.toJSON()));
+            this.collection.fetch({dataType: 'jsonp'});
+            return this;
+        },
+        
+        render_content: function() {
+            var el = this.$('.si-content').empty();
+            var options = this.options.toJSON();
             this.collection.each(function(story) {
-                el.append(story.view.el);
+                el.append(story.view.render(options));
             });
+        },
+        
+        setBlogUrl: function(state) {
+            if (!this.collection || !state) return;
+            this.collection.url = "http://statewatch.argoproject.org/" + state + "/api/get_recent_posts/?count=" + this.options.get('count');
+            return this;
         }
     });
     
-});
+})(window.jQuery);
