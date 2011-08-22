@@ -22,7 +22,9 @@
         
         initialize: function(attributes, options) {
             if (attributes.date) {
-                this.attributes.date = new Date( Date.parse( attributes.date ) );
+                // using a regex here since we know what the date will look like
+                var d = attributes.date.match(/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/);
+                this.attributes.date = new Date( d[1], d[2], d[3], d[4], d[5], d[6] );
             }
             this.view = new StoryView({ model: this });
         }

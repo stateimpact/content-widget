@@ -3,6 +3,7 @@
     
     window.StoryWidget = window.StoryWidget || {};
     var BASE_URL = "http://nprstateimpact.s3.amazonaws.com/widget/";
+    // var BASE_URL = "/public/assets/";
     
     var loadCSS = function(url, media) {
         var link   = document.createElement('link');
