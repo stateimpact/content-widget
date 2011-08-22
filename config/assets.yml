@@ -1,6 +1,6 @@
 package_assets: off
 gzip_assets: off
-compress_assets: on
+compress_assets: off
 template_function: _.template
 
 javascripts:
@@ -9,6 +9,9 @@ javascripts:
         - js/backbone.js
         - jst/*.jst
         - js/widget.js
+    
+    loader:
+        - js/loader.js
 
 stylesheets:
     widget:

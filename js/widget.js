@@ -1,28 +1,4 @@
-(function() {
-    function require(variable, src) {
-        if (!variable || !src) return;
-        if (!window[variable]) {
-            var script = document.createElement('script');
-            script.src = src;
-            document.head.appendChild(script);
-            console.log("Loaded " + variable);
-        }
-    }
-    window.require = require;
-    
-})();
-
-(function($) {
-    var BASE_URL = "http://localhost:9000/";
-    var loadCSS = function(url, media) {
-        var link   = document.createElement('link');
-        link.rel   = 'stylesheet';
-        link.type  = 'text/css';
-        link.media = media || 'screen';
-        link.href  = url;
-        var head   = document.getElementsByTagName('head')[0];
-        head.appendChild(link);
-    };
+(function($) {    
     
     var WidgetOptions = Backbone.Model.extend({
         
@@ -96,11 +72,10 @@
             this.collection.bind('reset', this.render_content);
             this.setBlogUrl(options.state);
             this.template = window.JST['widget'];
-            return this.render();
+            return $(this.render);
         },
         
         render: function() {
-            loadCSS(BASE_URL + 'css/widget.css');
             $(this.el).html(this.template(this.options.toJSON()));
             this.collection.fetch({dataType: 'jsonp'});
             return this;
@@ -116,7 +91,7 @@
         
         setBlogUrl: function(state) {
             if (!this.collection || !state) return;
-            this.collection.url = "http://statewatch.argoproject.org/" + state + "/api/get_recent_posts/?count=" + this.options.get('count');
+            this.collection.url = "http://statewatch.argoproject.org/" + state.toLowerCase() + "/api/get_recent_posts/?count=" + this.options.get('count');
             return this;
         }
     });
