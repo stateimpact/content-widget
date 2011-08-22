@@ -91,7 +91,7 @@
         
         setBlogUrl: function(state) {
             if (!this.collection || !state) return;
-            this.collection.url = "http://statewatch.argoproject.org/" + state.toLowerCase() + "/api/get_recent_posts/?count=" + this.options.get('count');
+            this.collection.url = "http://stateimpact.npr.org/" + state.toLowerCase() + "/api/get_recent_posts/?count=" + this.options.get('count');
             return this;
         }
     });
