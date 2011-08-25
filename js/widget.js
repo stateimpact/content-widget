@@ -51,6 +51,9 @@
         },
         
         render: function(options) {
+            if (options.last) {
+                $(this.el).addClass("si-story-last");
+            }
             var context = {
                 story: this.model.toJSON(),
                 options: options
@@ -86,7 +89,14 @@
         render_content: function() {
             var el = this.$('.si-content').empty();
             var options = this.options.toJSON();
-            this.collection.each(function(story) {
+            var length = this.collection.length;
+            this.collection.each(function(story, i, models) {
+                options.index = i;
+                if (i === (length - 1)) {
+                    options.last = true;
+                } else {
+                    options.last = false;
+                };
                 el.append(story.view.render(options));
             });
         },
