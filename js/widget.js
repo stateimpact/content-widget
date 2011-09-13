@@ -1,12 +1,24 @@
 (function($) {    
     
+    function slugify(name) {
+        return name.toLowerCase().replace(' ', '-');
+    }
+    
     var WidgetOptions = Backbone.Model.extend({
         
         defaults: {
             count: 10,
             excerpts: true,
             theme: "light",
-            state: null
+            state: null,
+            slug: null
+        },
+        
+        initialize: function(attributes, options) {
+            that = this;
+            this.bind('change:state', function(model, value, options) {
+                that.set({ slug: slugify(that.get('state'))});
+            });
         }
     });
     
@@ -103,7 +115,7 @@
         
         setBlogUrl: function(state) {
             if (!this.collection || !state) return;
-            this.collection.url = "http://stateimpact.npr.org/" + state.toLowerCase() + "/api/get_recent_posts/?count=" + this.options.get('count');
+            this.collection.url = "http://stateimpact.npr.org/" + slugify(state) + "/api/get_recent_posts/?count=" + this.options.get('count');
             return this;
         }
     });
