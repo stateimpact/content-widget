@@ -25,14 +25,28 @@
 	overflow: hidden !important; 
 	line-height: 40px !important; 
 	margin: 0 !important; 
-	padding: 0 !important; 
+	padding: 0 0 10px 0 !important; 
 	background: #333 !important;
 	font: 200 22px/40px "Helvetica Neue",Arial,Helvetica,sans-serif !important;
 	text-transform: capitalize !important;
  }
 .si-dark .si-header { background: #000 !important; }
 .si-state { letter-spacing: .1em !important; margin-left: 10px !important; color: #fff !important;  }
-.si-logo { display: block !important; float: left !important; width: 140px !important; height: 40px !important; background: url(/widget/widget-logo.png) no-repeat !important; text-indent: -9999em; }
+.si-logo { 
+	margin: 0 0 0 10px;
+	display: block !important; 
+	float: left !important; 
+	width: 140px !important; 
+	height: 40px !important; 
+	background: url(/widget/widget-logo.png) no-repeat !important; 
+	text-indent: -9999em; 
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0 2px 2px 2px;
+	-webkit-box-shadow: 0 1px 3px #000;
+	   -moz-box-shadow: 0 1px 3px #000;
+	        box-shadow: 0 1px 3px #000;
+}
 
 .si-story { padding: 10px !important; border-top: 1px solid #eee !important; }
 .si-dark .si-story { 
